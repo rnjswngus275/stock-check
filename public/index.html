@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>스톡 시그널 — 빠른 매수·관망·매도 판단</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="/styles.css" />
+  </head>
+  <body>
+    <div class="page">
+      <header class="header">
+        <p class="eyebrow">의사결정 지원</p>
+        <h1>스톡 시그널</h1>
+        <p class="lede">
+          종목만 고르면 가격·추세·시장 심리·모멘텀을 한눈에 보고,
+          <strong>BUY / HOLD / SELL</strong> 방향을 색으로 바로 확인할 수 있습니다.
+        </p>
+      </header>
+
+      <section class="panel picker-panel" aria-label="종목 선택">
+        <h2 class="section-title">종목 선택</h2>
+        <p class="hint">버튼만 눌러도 됩니다. 목록에서 고르거나 짧게 입력해 자동완성할 수도 있어요.</p>
+
+        <div class="chips" id="popular-chips" role="group" aria-label="인기 종목"></div>
+
+        <div class="row">
+          <label class="field">
+            <span class="field-label">또는 목록에서 선택</span>
+            <select id="symbol-select" aria-label="종목 드롭다운"></select>
+          </label>
+        </div>
+
+        <div class="row autocomplete-row">
+          <label class="field grow">
+            <span class="field-label">자동완성 (선택)</span>
+            <input
+              id="symbol-input"
+              type="text"
+              list="symbol-list"
+              placeholder="예: AMD"
+              autocomplete="off"
+              spellcheck="false"
+              maxlength="20"
+              aria-label="종목 심볼 자동완성"
+            />
+            <datalist id="symbol-list"></datalist>
+          </label>
+          <button type="button" class="btn primary" id="analyze-btn">
+            분석하기
+          </button>
+        </div>
+      </section>
+
+      <div
+        id="error-banner"
+        class="banner error hidden"
+        role="alert"
+        aria-live="polite"
+      ></div>
+
+      <div id="loading" class="loading hidden" aria-live="polite" aria-busy="true">
+        <div class="spinner" aria-hidden="true"></div>
+        <p>시장 데이터를 불러오는 중…</p>
+      </div>
+
+      <main id="results" class="results hidden" aria-live="polite">
+        <section
+          id="verdict"
+          class="verdict-card"
+          aria-label="최종 추천"
+        >
+          <div class="verdict-inner">
+            <p class="verdict-label">최종 추천</p>
+            <p id="verdict-text" class="verdict-text">—</p>
+            <p id="verdict-symbol" class="verdict-symbol"></p>
+          </div>
+        </section>
+
+        <div class="cards" id="metric-cards"></div>
+      </main>
+
+      <footer class="footer">
+        <p>
+          참고용 도구이며 투자 권유가 아닙니다. 실제 투자는 본인 판단과 리스크 관리가 필요합니다.
+        </p>
+      </footer>
+    </div>
+
+    <script src="/app.js"></script>
+  </body>
+</html>
